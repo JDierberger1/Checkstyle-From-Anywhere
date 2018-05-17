@@ -21,10 +21,16 @@ public class InstallCheckstyleFromAnywhere {
         		+ localDirectory.getAbsolutePath() + File.separator + "checkstyle.jar -c "
         		+ localDirectory.getAbsolutePath() + File.separator + " cs1331-checkstyle.xml %*");
         ps.close();
-        System.out.println("Adding current directory to registry...");
-    	Advapi32Util.registrySetStringValue(HKEY_CURRENT_USER, "Environment", "Path",
-    			Advapi32Util.registryGetStringValue(HKEY_CURRENT_USER, "Environment", "Path")
-    			+ ";" + localDirectory.getAbsolutePath());
+        BufferedReader consoleReader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Do you want to automatically add the current directory to your PATH? Or do you want to do that manually?");
+        System.out.println("NOTE: Your PATH could potentially be damaged, which could potentially cause serious problems.");
+        System.out.println("By entering \"YES\" to continue you acknowledge you and you alone are responsible if your PATH is damaged.");
+        if (consoleReader.readLine().equals("YES")){
+	        System.out.println("Adding current directory to registry...");
+	    	Advapi32Util.registrySetStringValue(HKEY_CURRENT_USER, "Environment", "Path",
+	    			Advapi32Util.registryGetStringValue(HKEY_CURRENT_USER, "Environment", "Path")
+	    			+ ";" + localDirectory.getAbsolutePath());
+    	}
     	System.out.println("Done. Restart command prompt to test.");
     }
 
