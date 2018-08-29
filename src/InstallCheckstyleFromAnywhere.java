@@ -40,12 +40,12 @@ public class InstallCheckstyleFromAnywhere {
 		    			Advapi32Util.registryGetStringValue(HKEY_CURRENT_USER, "Environment", "Path")
 		    			+ ";" + localDirectory.getAbsolutePath());
 		    	System.out.println("Depending on your system, you may need to add the following string to your system PATH manually:");
-	    		System.out.println(";" + localDirectory.getAbsolutePath());
+	    		System.out.println(";" + localDirectory.getAbsolutePath() + " (excluding semicolon on Windows 8 or 10)");
 	        }
     	} else {
     		System.out.println("Automatic PATH addition aborted");
     		System.out.println("You will need to add the following string to your PATH:");
-    		System.out.println(";" + localDirectory.getAbsolutePath());
+    		System.out.println(";" + localDirectory.getAbsolutePath() + " (excluding semicolon on Windows 8 or 10)");
     	}
     	System.out.println("Done.");
     	System.out.println("Once the PATH has been changed, restart command prompt and run the command \"checkstyle\".");
